@@ -19,7 +19,7 @@ public class TextProcess {
         return textBuilder.toString();
     }
 
-    public static String correctLastCharacter(String text) {
+    public static String replaceAWithOAfterP(String text) {
         StringBuilder textBuilder = new StringBuilder(text);
         Pattern pattern = Pattern.compile("РА");
         Matcher matcher = pattern.matcher(textBuilder);
@@ -40,7 +40,7 @@ public class TextProcess {
         return textBuilder.toString();
     }
 
-    public static String deleteNotLetterCharacters(String text) {
+    public static String deleteNonLetterCharacters(String text) {
         StringBuilder textBuilder = new StringBuilder(text);
         Pattern pattern = Pattern.compile("([a-zA-Zа-яА-Я ])+");
         Matcher matcher = pattern.matcher(textBuilder);
@@ -55,7 +55,7 @@ public class TextProcess {
         return textBuilder.toString();
     }
 
-    public static String deleteConsonantLetterWord(String text, int wordLength) {
+    public static String deleteWordsStartingWithConsonantLetter(String text, int wordLength) {
         StringBuilder textBuilder = new StringBuilder(text);
         Pattern pattern = Pattern.compile("(^" + CONSONANT_LETTER_PATTERN + WORD_CHARACTER_PATTERN + "{" + (wordLength - 1) + "," + (wordLength - 1) + "})");
         Matcher matcher = pattern.matcher(textBuilder);

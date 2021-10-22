@@ -29,32 +29,6 @@ public class Array {
         setSortedArray(true, true);
     }
 
-    public Array(String file) {
-        try {
-            var temp = new ArrayList<Integer>();
-            Scanner s = new Scanner(file);
-            while (s.hasNextInt())
-                temp.add(s.nextInt());
-            array = new int[temp.size()];
-            for (int i = 0; i < temp.size(); i++) {
-                array[i] = (int) temp.toArray()[i];
-            }
-        } catch (Exception e) {
-            array = new int[0];
-        }
-        setSortedArray(true, true);
-    }
-
-    public void fillRandomArray() {
-        var random = new Random();
-        int size = 10 + random.nextInt(20);
-        array = new int[size];
-        for (int i = 0; i < size; i++) {
-            array[i] = random.nextInt(1000);
-        }
-        setSortedArray(true, true);
-    }
-
     private void setSortedArray(boolean createNewSortedArray, boolean feelSortedArray) {
         if (createNewSortedArray)
             sortedArray = new int[array.length];
@@ -62,7 +36,7 @@ public class Array {
             for (int i = 0; i < array.length; i++) {
                 sortedArray[i] = array[i];
             }
-            sortedArray = sortArray(sortedArray);
+            selectionSort(sortedArray);
         }
     }
 
@@ -108,54 +82,39 @@ public class Array {
         return array.length;
     }
 
-    private static int[] sortArray(int[] arr) {
-        int gap = arr.length / 2;
-        while (gap >= 1) {
-            for (int right = 0; right < arr.length; right++) {
-                for (int c = right - gap; c >= 0; c -= gap) {
-                    if (arr[c] > arr[c + gap]) {
-                        swap(arr, c, c + gap);
-                    }
-                }
+    public void insertionSort() {
+        for (int i = 1; i < array.length; ++i) {
+            int key = array[i];
+            int j = i - 1;
+            while (j >= 0 && array[j] > key) {
+                array[j + 1] = array[j];
+                j = j - 1;
             }
-            gap = gap / 2;
+            array[j + 1] = key;
         }
-        return arr;
+    }
+
+    public void selectionSort() {
+        selectionSort(this.array);
+    }
+
+    private static void selectionSort(int[] array) {
+        for (int i = 0; i < array.length - 1; i++) {
+            int min_idx = i;
+            for (int j = i + 1; j < array.length; j++)
+                if (array[j] < array[min_idx])
+                    min_idx = j;
+            swap(array, i, min_idx);
+        }
     }
 
     public void bubbleSort() {
-        for (int i = 1; i < array.length; i++) {
-            if (array[i] < array[i - 1]) {
-                swap(array, i, i - 1);
-            }
-        }
-    }
-
-    public void selectionSort(){
-        for (int left = 0; left < array.length; left++) {
-            int minInd = left;
-            for (int i = left; i < array.length; i++) {
-                if (array[i] < array[minInd]) {
-                    minInd = i;
+        for (int i = 0; i < array.length - 1; i++)
+            for (int j = 0; j < array.length - i - 1; j++)
+                if (array[j] > array[j + 1]) {
+                    swap(array, j, j + 1);
                 }
-            }
-            swap(array, left, minInd);
-        }
-    }
 
-    public void insertionSort(){
-        for (int left = 0; left < array.length; left++) {
-            int value = array[left];
-            int i = left - 1;
-            for (; i >= 0; i--) {
-                if (value < array[i]) {
-                    array[i + 1] = array[i];
-                } else {
-                    break;
-                }
-            }
-            array[i + 1] = value;
-        }
     }
 
     private static void swap(int[] array, int ind1, int ind2) {
@@ -281,11 +240,10 @@ public class Array {
     @Override
     public String toString() {
         String string = getClass().getName() +
-                "{array=\n";
+                "{array= ";
         for (int i = 0; i < array.length; i++) {
             string += array[i];
-            if (i < array.length - 1) string += ",";
-            string += "\n";
+            if (i < array.length - 1) string += ", ";
         }
         string += '}';
         return string;

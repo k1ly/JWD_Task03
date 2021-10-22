@@ -5,19 +5,29 @@ import by.epamtc.lyskovkirill.task0303.util.TextProcess;
 public class Main {
 
     public static void main(String[] args) {
-        var str1 = "owh fowehfi: hwf%oeh wife; ofweho.weifh";
-        System.out.println(TextProcess.replaceEveryKCharInWord(str1, 4, 'O'));
+        System.out.println("Replace every k-th character in word\nOriginal: ");
+        var str1 = "owh fowehfi: hwf%oeh wife; ofweho.weifh";   //var str1 = ConsoleScanner.enterString();
+        System.out.println(str1);
+        System.out.println("Processed:\n" + TextProcess.replaceEveryKCharInWord(str1, 4, 'O') + "\n");
 
-        var str2 = "iwcjРА зщуозозАР зщоуаРОзоу ЗОРАЛЩщлу Р А РАзо";
-        System.out.println(TextProcess.correctLastCharacter(str2));
+        System.out.println("Replace A with O after P\nOriginal: ");
+        var str2 = "iwcjРА зщуозозАР зщоуаРОзоу ЗОРАЛЩщлу Р А РАзо";    //var str2 = ConsoleScanner.enterString();
+        System.out.println(str2);
+        System.out.println("Processed:\n" + TextProcess.replaceAWithOAfterP(str2) + "\n");
 
-        var str3 = "ojwdo owkdpwkdqp(3230:wpodk$";
-        System.out.println(TextProcess.replaceWordWithSubstring(str3, 4, "TTTTTT"));
+        System.out.println("Replace words with this length with substring\nOriginal: ");
+        var str3 = "ojwdo owkdpwkdqp(3230:wpodk$";  //var str3 = ConsoleScanner.enterString();
+        System.out.println(str3);
+        System.out.println("Processed:\n" + TextProcess.replaceWordWithSubstring(str3, 4, "TTTTTT") + "\n");
 
-        var str4 = "jfowefi 4893p oe oj(#4 wjefpwef";
-        System.out.println(TextProcess.deleteNotLetterCharacters(str4));
+        System.out.println("Delete non-letter characters and insert spaces\nOriginal: ");
+        var str4 = "jfowefi 4893p oe oj(#4 wjefpwef";   //var str4 = ConsoleScanner.enterString();
+        System.out.println(str4);
+        System.out.println("Processed:\n" + TextProcess.deleteNonLetterCharacters(str4) + "\n");
 
-        var str5 = "kodw udwo okopwf upwphfe(fpwf)";
-        System.out.println(TextProcess.deleteConsonantLetterWord(str5, 4));
+        System.out.println("Delete every word starting with consonant letter\nOriginal: ");
+        var str5 = "kodw udwo okopwf upwphfe(fpwf)";    //var str5 = ConsoleScanner.enterString();
+        System.out.println(str5);
+        System.out.println("Processed:\n" + TextProcess.deleteWordsStartingWithConsonantLetter(str5, 4) + "\n");
     }
 }
